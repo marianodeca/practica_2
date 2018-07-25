@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculadora Jquery</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+  <style type="text/css">
+    
+    body{
+      background-color: #adebad;
+    }
+
+    .calculadora{
+      width: 50%; 
+      margin: auto;
+      margin-top: 10%;
+      padding: 5%;
+      height: 100%;    
+      background-color: #46d246 !important;
+    }
+    
+    label{
+      font-size: 1.2em;
+    }
+
+    input{
+      width: 80% !important; 
+      margin:auto !important;
+      font-size: 1.2em !important;
+      padding: 0.5em !important;  
+      text-align: right !important;
+      /*margin-right: 0.5em;*/ 
+    }
+    
+     .calculadora .unit, .bin, .igual {
+
+      width: 70%;
+      margin: auto;
+      margin-top:1em;
+      /*margin-left: 10em;*/
+    
+    }
+
+    .calculadora .unit button, .bin button {
+      width: 25%;
+      margin-left: 3%;
+      margin-top: 2%;
+      font-size: 1.2em;   
+
+    } 
+    .bin button{
+      background-color: #3333ff;
+      color:yellow;
+    }
+    
+    .unit button {
+      border:none;
+      color: #000066;
+    }
+
+
+    #calc {
+
+        width: 54% !important;        
+        background-color: #000066 !important;
+        color: white !important;  
+    } 
+
+    #sumat, #prod {
+
+      background-color: #0000cc !important;
+        color: white !important;  
+    }
+
+    
+  </style>
+
+<script type="text/javascript">
+  
+   var acc = 0, op = "", res = 0, numb = 0;
+
+    
+   $(function() {
+     
+     //Funcion vaciar cajetin
+     $("#num").on("click", 
+      function(){ $("#num").val("");}
+    );
+
+     //operaciones unitarias
+      $("#pot").on("click", 
+        function() {
+          var num = $("#num");
+          num.val(num.val() * num.val());
+        }
+      );
+
+      $("#raiz").on("click", 
+        function() {
+          var num = $("#num");
+          num.val(Math.sqrt(num.val()));
+        }
+      );
+
+      $("#inv").on("click", 
+        function() {
+          var num = $("#num");
+          num.val(1/num.val());
+        }
+      );
+
+      $("#ent").on("click", 
+        function() {
+          var num = $("#num");
+
+          if (num.val()>0){
+            num.val(Math.floor(num.val())); 
+          }else{
+            num.val(Math.ceil(num.val())); 
+          }
+         
+        }
+      );
+
+      $("#expn").on("click", 
+        function() {
+          var num = $("#num");
+          num.val(Math.pow(2, +num.val()));
+        }
+      );
+
+      $("#fac").on("click", 
+        function() {
+          var num = $("#num");
+          var total = 1;
+
+          for (var i = 1; i<=num.val(); i++) {
+            
+            total = total * i;
+          }
+
+          num.val(total);  
+          
+        }
+      );
+
+       //Operaciones binarias 
+       $("#mas").on("click",
+        function(){
+         acc = $("#num").val();
+         op = "+";
+               
+        }
+      ); 
+
+      $("#menos").on("click",
+        function(){
+         acc= $("#num").val();
+         op = "-";
+        }
+      ); 
+
+       $("#mult").on("click",
+        function(){
+           acc = $("#num").val();
+           op = "*";
+        }
+      ); 
+
+      $("#div").on("click",
+        function(){
+         acc = $("#num").val();
+         op = "/";
+       }
+      ); 
+
+      $("#exp").on("click",
+        function(){
+         acc = $("#num").val();
+         op = "y";
+       }
+      ); 
+
+      $("#calc").on("click",
+        function(){
+         var numb = $("#num");
+        
+      //console.log(acc + numb + op)
+       
+                 if (op === "+"){ numb.val(+acc + +numb.val());};
+                 if (op === "-"){ numb.val(+acc - +numb.val());};
+                 if (op === "*"){ numb.val(+acc * +numb.val());};
+                 if (op === "/"){ numb.val(+acc / +numb.val());};         
+                 if (op === "y"){ numb.val(Math.pow(+acc, +numb.val()));};                   
+                
+        }
+      );  
+     
+     // Operaciones con n operandos introducidos en formato CSV
+     
+     /****  Sumatoria  *****/
+     $("#sumat").on("click", 
+        function(){
+
+            var num = $("#num");
+            var arr = num.val().split(",");
+            var suma = 0;
+
+            for (var i = 0 ; i < arr.length; i++) {
+                  
+                    suma += +arr[i];
+                   }
+
+              num.val(suma);     
+
+        }
+      );
+
+      /****  Producto  *****/
+     $("#prod").on("click", 
+        function(){
+
+            var num = $("#num");
+            var arr = num.val().split(",");
+            var producto = 1;
+
+            for (var i = 0 ; i < arr.length; i++) {
+                  
+                    producto *= +arr[i];
+                   }
+
+              num.val(producto);     
+
+        }
+      );
+
+  //fin de la funcion
+  }); 
+  
+</script>
+</head>
+<body>
+   <div class="container">
+         <nav class="navbar navbar-inverse ">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="index.html">MOOC</a>
+              </div>
+              <div class="collapse navbar-collapse" id="miMenu">
+                <ul class="nav navbar-nav">
+                  <li><a href="index.html">INICIO</a></li>
+                  <li><a href="puzzle.html">PUZZLE</a></li>
+                  <li class="active"><a href="calculadora.htm">Calculadora</a></li> 
+                  <li><a href="reloj.htm">Temporizador</a></li> 
+                  <li><a href="tangram.html">Tangram</a></li> 
+                </ul>
+              </div>
+            </div>
+            </nav>
+
+    
+      <div class="container">
+          
+        <h2>Buenos dias</h2>
+        <h3>Bienvenidos a la calculadora de Mariano Decastelli con Jquery</h3>
+        
+          <div class="calculadora">
+              <input class="form-control" type="text" size="15" id="num">
+            
+              <div class="unit">    
+                  <button  class="btn btn-info" id="pot">x<sup>2</sup></button>
+                  <button class="btn btn-info" id="raiz"> v<sup>--</sup> </button>
+                  <button class="btn btn-info" id="inv"> 1/x </button> 
+                  <button class="btn btn-info" id="ent">Z</button>
+                  <button class="btn btn-info" id="expn">2^n</button>
+                  <button class="btn btn-info" id="fac">n!</button>
+              </div>
+
+              <div class="bin">  
+                  <button class="btn btn-info" id="mas">+</button>
+                  <button class="btn btn-info" id="menos">-</button>
+                  <button class="btn btn-info" id="mult">*</button>
+                  <button class="btn btn-info" id="div">/</button>
+                  <button class="btn btn-info" id="exp">x^y</button>
+                 
+                  <button class="btn btn-info" id="sumat">Σx</button>
+                  <button class="btn btn-info" id="prod">*Xn</button>
+                  
+                  <button class="btn btn-info" id="calc">=</button>
+               </div>  
+
+         
+        </div>
+
+     <div>
+    <div>  
+
+</body>
+</html>

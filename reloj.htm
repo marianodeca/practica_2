@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html><head><title>Reloj</title>
+	  <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+
+<script type="text/javascript">
+
+  function mostrar_fecha( ) {
+    $("#fecha").html("<h3>"+ new Date( ) +"</h3>");  
+  }
+
+  $(function(){ 
+      // Define evento periodico, ocurre
+      // cada segundo (1000 miliseg)
+    setInterval(mostrar_fecha, 1000); 
+
+           // muestra fecha al cargar
+    mostrar_fecha();
+  });
+</script>
+
+<style type="text/css">
+  h3{
+    font-size: 1.5em;
+    color:blue;
+
+  }
+
+  body{
+    background-color: #d6f5d6;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+      <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand" href="index.html">MOOC</a>
+          </div>
+          <div class="collapse navbar-collapse" id="miMenu">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">INICIO</a></li>
+              <li><a href="puzzle.html">PUZZLE</a></li>
+              <li><a href="calculadora.htm">Calculadora</a></li> 
+              <li class="active"><a href="reloj.htm">Temporizador</a></li> 
+              <li><a href="tangram.html">Tangram</a></li> 
+            </ul>
+          </div>
+        </div>
+        </nav>
+
+  <h2>Reloj</h2>
+
+  <div id="fecha"><div>
+</body>
+</html>
+
